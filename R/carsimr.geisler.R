@@ -46,7 +46,7 @@ initialize_grid <- function(rho, r, c, p) {
 plot.carsimr <- function(x, y, ...) {
   class(x) <- "matrix"
   image(t(x[rev(seq_len(nrow(x))), ]),
-    col = c("white", "blue", "red"), xaxt = 'n', yaxt = 'n',
+    col = c("white", "blue", "red"), xaxt = "n", yaxt = "n",
     breaks = c(-.5, .5, 1.5, 2.5)
   )
 }
