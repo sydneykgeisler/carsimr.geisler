@@ -201,9 +201,6 @@ plot.carsimrlist <- function(x, y, ...) {
   }
 }
 
-sim1 <- move_cars(rho = 0.3, r = 10, c = 15, p = 0.9, trials = 10)
-plot(sim1)
-sim2 <- move_cars(rho = 0.1, r = 15, c = 10, p = 0.1, trials = 10)
-plot(sim2)
-sim3 <- move_cars(rho = 0.6, r = 15, c = 15, p = 0.5, trials = 10)
-plot(sim3)
+test1 <- function(){
+  .Call('carsimr.geisler_initialize_grid_cpp', PACKAGE = 'carsimr.geisler')
+}
