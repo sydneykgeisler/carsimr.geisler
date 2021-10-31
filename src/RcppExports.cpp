@@ -79,21 +79,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// simulate_grid_cpp
-List simulate_grid_cpp(NumericMatrix m, int trials);
-RcppExport SEXP _carsimr_geisler_simulate_grid_cpp(SEXP mSEXP, SEXP trialsSEXP) {
+// simulate_grid_cpp_c
+List simulate_grid_cpp_c(NumericMatrix m, int trials);
+RcppExport SEXP _carsimr_geisler_simulate_grid_cpp_c(SEXP mSEXP, SEXP trialsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
     Rcpp::traits::input_parameter< int >::type trials(trialsSEXP);
-    rcpp_result_gen = Rcpp::wrap(simulate_grid_cpp(m, trials));
+    rcpp_result_gen = Rcpp::wrap(simulate_grid_cpp_c(m, trials));
     return rcpp_result_gen;
 END_RCPP
 }
-// move_cars_cpp
-List move_cars_cpp(double rho, int r, int c, double p, int trials);
-RcppExport SEXP _carsimr_geisler_move_cars_cpp(SEXP rhoSEXP, SEXP rSEXP, SEXP cSEXP, SEXP pSEXP, SEXP trialsSEXP) {
+// move_cars_cpp_c
+List move_cars_cpp_c(double rho, int r, int c, double p, int trials);
+RcppExport SEXP _carsimr_geisler_move_cars_cpp_c(SEXP rhoSEXP, SEXP rSEXP, SEXP cSEXP, SEXP pSEXP, SEXP trialsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -102,12 +102,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type c(cSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
     Rcpp::traits::input_parameter< int >::type trials(trialsSEXP);
-    rcpp_result_gen = Rcpp::wrap(move_cars_cpp(rho, r, c, p, trials));
+    rcpp_result_gen = Rcpp::wrap(move_cars_cpp_c(rho, r, c, p, trials));
     return rcpp_result_gen;
 END_RCPP
 }
-
-RcppExport SEXP carsimr.geisler_initialize_grid_cpp();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_carsimr_geisler_rho_value", (DL_FUNC) &_carsimr_geisler_rho_value, 3},
@@ -116,9 +114,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_carsimr_geisler_initialize_grid_cpp", (DL_FUNC) &_carsimr_geisler_initialize_grid_cpp, 5},
     {"_carsimr_geisler_move_red_cpp", (DL_FUNC) &_carsimr_geisler_move_red_cpp, 1},
     {"_carsimr_geisler_move_blue_cpp", (DL_FUNC) &_carsimr_geisler_move_blue_cpp, 1},
-    {"_carsimr_geisler_simulate_grid_cpp", (DL_FUNC) &_carsimr_geisler_simulate_grid_cpp, 2},
-    {"_carsimr_geisler_move_cars_cpp", (DL_FUNC) &_carsimr_geisler_move_cars_cpp, 5},
-    {"carsimr.geisler_initialize_grid_cpp", (DL_FUNC) &carsimr.geisler_initialize_grid_cpp, 0},
+    {"_carsimr_geisler_simulate_grid_cpp_c", (DL_FUNC) &_carsimr_geisler_simulate_grid_cpp_c, 2},
+    {"_carsimr_geisler_move_cars_cpp_c", (DL_FUNC) &_carsimr_geisler_move_cars_cpp_c, 5},
     {NULL, NULL, 0}
 };
 

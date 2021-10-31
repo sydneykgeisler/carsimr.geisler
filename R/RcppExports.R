@@ -42,6 +42,7 @@ generate_and_shuffle <- function(n, n2, p) {
 #' @param r The number of rows in the grid
 #' @param c The number of columns in the grid
 #' @param p The proportion of blue and red cars as determined by the Bernoulli
+#' @param seed The seed to be set for reproduceability.
 #' distribution
 #' @exportClass carsimr
 #' @export
@@ -70,15 +71,14 @@ move_blue_cpp <- function(m) {
 #'
 #' C++ version of simulate_grid.
 #'
-#' @param move_red_cars Calls the 'move_red_cars' function notated above.
-#' @param move_blue_cars Calls the 'move_blue_cars' function notated above.
+#' @param m A numeric matrix of class "carsimr" to be simulated.
 #' @param trials Specifies the number of times the cars move on the grid.
 #' @export
-simulate_grid_cpp <- function(m, trials) {
-    .Call(`_carsimr_geisler_simulate_grid_cpp`, m, trials)
+simulate_grid_cpp_c <- function(m, trials) {
+    .Call(`_carsimr_geisler_simulate_grid_cpp_c`, m, trials)
 }
 
-#' move_cars_cpp
+#' move_cars_cpp_c
 #'
 #' C++ version of move_cars
 #'
@@ -88,7 +88,7 @@ simulate_grid_cpp <- function(m, trials) {
 #' @param p The proportion of red cars in the grid.
 #' @param trials The number of grid movements to be simulated.
 #' @export
-move_cars_cpp <- function(rho, r, c, p, trials) {
-    .Call(`_carsimr_geisler_move_cars_cpp`, rho, r, c, p, trials)
+move_cars_cpp_c <- function(rho, r, c, p, trials) {
+    .Call(`_carsimr_geisler_move_cars_cpp_c`, rho, r, c, p, trials)
 }
 

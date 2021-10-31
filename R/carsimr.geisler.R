@@ -184,6 +184,65 @@ move_cars <- function(rho, r, c, p, trials) {
   simulate_grid(mat, move_red_cars, move_blue_cars, trials)
 }
 
+#' as.carsimr
+#'
+#' Converts matrices to class "carsimr"
+#'
+#' @param x A numeric matrix
+#' @param ... Optional.
+#'
+as.carsimrlist <- function(x, ...) {
+  structure(x, class = "carsimrlist")
+}
+
+#' simulate_grid_cpp
+#'
+#' A wrapper function that converts simulate_grid_cpp to class "carsimr"
+#'
+#' @param m a numeric matrix.
+#' @param trials The number of car movement iterations.
+
+simulate_grid_cpp <- function(m, trials) {
+  car_sim <- simulate_grid_cpp_c(m, trials)
+  for (i in seq_len(length(car_sim))) {
+    class(car_sim[[i]]) <- "carsimr"
+  }
+  class(car_sim) <- "carsimrlist"
+  car_sim
+}
+
+#' c++ functions return a list of matrices, we want to make a carsimr object
+#' that looks like the one we made originally.
+#' @param x a list of matrices.
+
+carsimr_convert <- function(x) {
+  dims <- dim(x[[1]])
+  trials <- length(x)
+  results <- matrix(0, prod(dims), trials)
+  for (i in seq_len(trials)) {
+    results[, i] <- as.vector(x[[i]])
+  }
+  as.carsimrlist(results, dims[1], dims[2])
+}
+
+#' Wrapper to c++ functions.
+#'
+#' @param rho A proportion between 0 and 1 of the number of grids that
+#'   should be filled with cars. Alternatively, an integer value specifying
+#'   the precise number of cars.
+#' @param r The number of rows in the car grid.
+#' @param c The number of columns in the car grid.
+#' @param p The probability (between 0 and 1) of selecting a blue car.
+#'   This means the probability of selecting a red car is 1-p.
+#' @param trials The number of grid moves to store.
+#'
+#' @export
+
+move_cars_cpp <- function(rho, r, c, p, trials) {
+  car_moves <- move_cars_cpp_c(rho, r, c, p, trials)
+  carsimr_convert(car_moves)
+}
+
 #' plot.carsimrlist
 #'
 #' Plots each iteration of car movement. In total, there will be 'trials+1'
@@ -199,8 +258,4 @@ plot.carsimrlist <- function(x, y, ...) {
     plot(x[[k]])
     Sys.sleep(0.2)
   }
-}
-
-test1 <- function(){
-  .Call('carsimr.geisler_initialize_grid_cpp', PACKAGE = 'carsimr.geisler')
 }

@@ -14,7 +14,9 @@ whole number}
 
 \item{c}{The number of columns in the grid}
 
-\item{p}{The proportion of blue and red cars as determined by the Bernoulli
+\item{p}{The proportion of blue and red cars as determined by the Bernoulli}
+
+\item{seed}{The seed to be set for reproduceability.
 distribution}
 }
 \description{

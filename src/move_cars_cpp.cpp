@@ -57,6 +57,7 @@ NumericVector generate_and_shuffle(int n, int n2, double p) {
 //' @param r The number of rows in the grid
 //' @param c The number of columns in the grid
 //' @param p The proportion of blue and red cars as determined by the Bernoulli
+//' @param seed The seed to be set for reproduceability.
 //' distribution
 //' @exportClass carsimr
 //' @export
@@ -135,12 +136,11 @@ NumericMatrix move_blue_cpp(NumericMatrix m) {
 //'
 //' C++ version of simulate_grid.
 //'
-//' @param move_red_cars Calls the 'move_red_cars' function notated above.
-//' @param move_blue_cars Calls the 'move_blue_cars' function notated above.
+//' @param m A numeric matrix of class "carsimr" to be simulated.
 //' @param trials Specifies the number of times the cars move on the grid.
 //' @export
 // [[Rcpp::export]]
-List simulate_grid_cpp(NumericMatrix m, int trials) {
+List simulate_grid_cpp_c(NumericMatrix m, int trials) {
   List grid_states(trials + 1) ;
   grid_states(0) = m ;
 
@@ -154,7 +154,7 @@ List simulate_grid_cpp(NumericMatrix m, int trials) {
   return grid_states ;
   }
 
-//' move_cars_cpp
+//' move_cars_cpp_c
 //'
 //' C++ version of move_cars
 //'
@@ -165,12 +165,12 @@ List simulate_grid_cpp(NumericMatrix m, int trials) {
 //' @param trials The number of grid movements to be simulated.
 //' @export
 // [[Rcpp::export]]
-List move_cars_cpp(double rho, int r, int c, double p, int trials) {
+List move_cars_cpp_c(double rho, int r, int c, double p, int trials) {
   NumericMatrix mat = initialize_grid_cpp(rho, r, c, p, 777) ;
-  List grids = simulate_grid_cpp(mat, trials) ;
+  List grids = simulate_grid_cpp_c(mat, trials) ;
   return grids ;
 }
 
 /*** R
-
+sim <- move_cars_cpp_c(0.4, 4, 4, 0.4, 4)
 */
