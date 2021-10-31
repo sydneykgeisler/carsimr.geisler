@@ -67,7 +67,7 @@ move_blue_cpp <- function(m) {
     .Call(`_carsimr_geisler_move_blue_cpp`, m)
 }
 
-#' simulate_grid_cpp
+#' simulate_grid_cpp_c
 #'
 #' C++ version of simulate_grid.
 #'

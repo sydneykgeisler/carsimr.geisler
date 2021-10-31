@@ -1,3 +1,9 @@
-The only note showing up has to do with Rcpp code, which is not required for homework 4. 
+In regards to the one note stating that .DS_Store was found. I tried many of the
+suggestions on the website below to remove this file but to no avail.
 
-R/unloads.R lines 2, 3, and 5 contain placeholder code for homework 5.
+https://stackoverflow.com/questions/30483670/delete-ds-store-files-in-current-folder-and-all-subfolders-from-command-line-on
+
+For the 'unloads.R' package, I got two lintr suggestions. One said that line 3
+should not be more than 80 characters, but this is because this line contains a
+url. Another said that on line 4, the function name style should be snake_case.
+However, it was typed this way because this was suggested code.

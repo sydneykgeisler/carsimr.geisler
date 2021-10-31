@@ -2,8 +2,8 @@
 % Please edit documentation in R/carsimr.geisler.R
 \name{carsimr_convert}
 \alias{carsimr_convert}
-\title{c++ functions return a list of matrices, we want to make a carsimr object that
-looks like the one we made originally.}
+\title{c++ functions return a list of matrices, we want to make a carsimr object
+that looks like the one we made originally.}
 \usage{
 carsimr_convert(x)
 }
@@ -11,6 +11,6 @@ carsimr_convert(x)
 \item{x}{a list of matrices.}
 }
 \description{
-c++ functions return a list of matrices, we want to make a carsimr object that
-looks like the one we made originally.
+c++ functions return a list of matrices, we want to make a carsimr object
+that looks like the one we made originally.
 }

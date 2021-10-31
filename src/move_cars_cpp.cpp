@@ -132,7 +132,7 @@ NumericMatrix move_blue_cpp(NumericMatrix m) {
   return m_new ;
 }
 
-//' simulate_grid_cpp
+//' simulate_grid_cpp_c
 //'
 //' C++ version of simulate_grid.
 //'

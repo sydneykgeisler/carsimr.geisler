@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{simulate_grid_cpp_c}
 \alias{simulate_grid_cpp_c}
-\title{simulate_grid_cpp}
+\title{simulate_grid_cpp_c}
 \usage{
 simulate_grid_cpp_c(m, trials)
 }

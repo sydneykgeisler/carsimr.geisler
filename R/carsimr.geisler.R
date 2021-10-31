@@ -191,7 +191,7 @@ move_cars <- function(rho, r, c, p, trials) {
 #' @param x A numeric matrix
 #' @param ... Optional.
 #'
-as.carsimrlist <- function(x, ...) {
+as_carsimrlist <- function(x, ...) {
   structure(x, class = "carsimrlist")
 }
 
@@ -222,7 +222,7 @@ carsimr_convert <- function(x) {
   for (i in seq_len(trials)) {
     results[, i] <- as.vector(x[[i]])
   }
-  as.carsimrlist(results, dims[1], dims[2])
+  as_carsimrlist(results, dims[1], dims[2])
 }
 
 #' Wrapper to c++ functions.
