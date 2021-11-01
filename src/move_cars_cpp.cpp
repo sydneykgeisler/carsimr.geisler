@@ -172,5 +172,5 @@ List move_cars_cpp_c(double rho, int r, int c, double p, int trials) {
 }
 
 /*** R
-sim <- move_cars_cpp_c(0.4, 4, 4, 0.4, 4)
+move_cars_cpp_c(0.4, 4, 4, 0.4, 4)
 */

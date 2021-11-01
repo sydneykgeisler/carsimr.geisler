@@ -3,3 +3,4 @@
 ^depricated$
 ^LICENSE\.md$
 ^exceptions$
+^.*\.DS_Store$

@@ -216,13 +216,10 @@ simulate_grid_cpp <- function(m, trials) {
 #' @param x a list of matrices.
 
 carsimr_convert <- function(x) {
-  dims <- dim(x[[1]])
-  trials <- length(x)
-  results <- matrix(0, prod(dims), trials)
-  for (i in seq_len(trials)) {
-    results[, i] <- as.vector(x[[i]])
+  for (i in seq_len(length(x))) {
+    class(x[[i]]) <- "carsimr"
   }
-  as_carsimrlist(results, dims[1], dims[2])
+  as_carsimrlist(x)
 }
 
 #' Wrapper to c++ functions.
