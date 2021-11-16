@@ -42,12 +42,10 @@ generate_and_shuffle <- function(n, n2, p) {
 #' @param r The number of rows in the grid
 #' @param c The number of columns in the grid
 #' @param p The proportion of blue and red cars as determined by the Bernoulli
-#' @param seed The seed to be set for reproduceability.
 #' distribution
-#' @exportClass carsimr
 #' @export
-initialize_grid_cpp <- function(rho, r, c, p, seed) {
-    .Call(`_carsimr_geisler_initialize_grid_cpp`, rho, r, c, p, seed)
+initialize_grid_cpp <- function(rho, r, c, p) {
+    .Call(`_carsimr_geisler_initialize_grid_cpp`, rho, r, c, p)
 }
 
 #' move_red_cpp

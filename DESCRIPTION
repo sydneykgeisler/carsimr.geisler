@@ -3,7 +3,7 @@ Type: Package
 Title: Initializes Grid of Red and Blue Cars
 Version: 0.1.0
 Author: Sydney Geisler
-Maintainer: <sydney.geisler@usu.edu>
+Maintainer: Sydney Geisler <sydneykgeisler@gmail.com>
 Description: Using the Bernoulli distribution, a specified proportion of cars to
     fill the grid, and the grid size, initialize_grid can randomly allocate red 
     and blue cars to a cell on the grid.
@@ -14,7 +14,6 @@ Imports:
     seqinr
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -15,13 +15,11 @@
 #' distribution
 #' @examples
 #' init_grid <- initialize_grid(rho = 0.3, r = 10, c = 10, p = 0.5)
-#' @exportClass carsimr
 #' @export
 
 initialize_grid <- function(rho, r, c, p) {
   ifelse(rho >= 1, number_cars <- rho, number_cars <- rho * r * c)
   number_cars <- round(number_cars)
-  set.seed(777)
   car_allocation <- Rlab::rbern(number_cars, p)
   mat <- matrix(3, r, c)
   mat[sample.int(length(mat), length(car_allocation))] <- car_allocation
@@ -176,7 +174,6 @@ simulate_grid <- function(matrix, move_red_cars, move_blue_cars, trials) {
 #' @param trials the number of simulations to be run on the grid.
 #' @examples
 #' car_simulation <- move_cars(rho = 0.4, r = 9, c = 9, p = 0.7, trials = 10)
-#' @exportClass carsimrlist
 #' @export
 
 move_cars <- function(rho, r, c, p, trials) {
@@ -190,7 +187,7 @@ move_cars <- function(rho, r, c, p, trials) {
 #'
 #' @param x A numeric matrix
 #' @param ... Optional.
-#'
+
 as_carsimrlist <- function(x, ...) {
   structure(x, class = "carsimrlist")
 }
@@ -255,4 +252,52 @@ plot.carsimrlist <- function(x, y, ...) {
     plot(x[[k]])
     Sys.sleep(0.2)
   }
+}
+
+#' track_blocks
+#'
+#' Tracks the proportion of blocked cars at each iteration. Returns a vector.
+#' @param moves A list of class "carsimr.list".
+#' @export
+
+track_blocks <- function(moves) {
+  trials <- length(moves) - 1
+  car_moves <- vector("list", trials)
+  moved_cars <- matrix(NA, trials, 1)
+  prop_moves <- vector("numeric", trials)
+  blocks <- vector("numeric", trials)
+  for (i in 1:trials) {
+    number_cars <- matrix(c(sum(moves[[i]] == 1), sum(moves[[i]] == 2)),
+                          trials, 1)
+    car_moves[[i]] <- moves[[i + 1]] - moves[[i]]
+    moved_cars[i] <- sum(car_moves[[i]] > 0)
+    prop_moves[i] <- moved_cars[i] / number_cars[i]
+    blocks[i] <- 1 - prop_moves[i]
+  }
+  blocks
+}
+
+#' move_cars_par
+#'
+#' @param rho The proportion or number of cars on the grid.
+#' @param r The number of rows in the grid.
+#' @param c The number of columns in the grid.
+#' @param p The proportion of red cars in the grid.
+#' @param trials The number of grid simulations.
+#' @param replicates The number of repeat grids to be created.
+#' @param cores The number of cores to be devoted to the computations.
+#' @export
+
+move_cars_par <- function(rho, r, c, p, trials, replicates, cores) {
+  cl <- parallel::makeCluster(cores)
+  parallel::clusterExport(cl = cl, varlist = c(
+    "rho", "r", "c", "p", "trials",
+    "replicates"
+  ), envir = environment())
+  tsamp <- parallel::parLapply(
+    cl, seq_len(replicates),
+    function(y) move_cars(rho, r, c, p, trials)
+  )
+  parallel::stopCluster(cl)
+  return(tsamp)
 }

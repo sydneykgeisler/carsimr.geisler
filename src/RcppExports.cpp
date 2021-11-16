@@ -43,8 +43,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // initialize_grid_cpp
-NumericMatrix initialize_grid_cpp(double rho, int r, int c, double p, int seed);
-RcppExport SEXP _carsimr_geisler_initialize_grid_cpp(SEXP rhoSEXP, SEXP rSEXP, SEXP cSEXP, SEXP pSEXP, SEXP seedSEXP) {
+NumericMatrix initialize_grid_cpp(double rho, int r, int c, double p);
+RcppExport SEXP _carsimr_geisler_initialize_grid_cpp(SEXP rhoSEXP, SEXP rSEXP, SEXP cSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,8 +52,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type r(rSEXP);
     Rcpp::traits::input_parameter< int >::type c(cSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
-    rcpp_result_gen = Rcpp::wrap(initialize_grid_cpp(rho, r, c, p, seed));
+    rcpp_result_gen = Rcpp::wrap(initialize_grid_cpp(rho, r, c, p));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -111,7 +110,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_carsimr_geisler_rho_value", (DL_FUNC) &_carsimr_geisler_rho_value, 3},
     {"_carsimr_geisler_randomShuffle", (DL_FUNC) &_carsimr_geisler_randomShuffle, 1},
     {"_carsimr_geisler_generate_and_shuffle", (DL_FUNC) &_carsimr_geisler_generate_and_shuffle, 3},
-    {"_carsimr_geisler_initialize_grid_cpp", (DL_FUNC) &_carsimr_geisler_initialize_grid_cpp, 5},
+    {"_carsimr_geisler_initialize_grid_cpp", (DL_FUNC) &_carsimr_geisler_initialize_grid_cpp, 4},
     {"_carsimr_geisler_move_red_cpp", (DL_FUNC) &_carsimr_geisler_move_red_cpp, 1},
     {"_carsimr_geisler_move_blue_cpp", (DL_FUNC) &_carsimr_geisler_move_blue_cpp, 1},
     {"_carsimr_geisler_simulate_grid_cpp_c", (DL_FUNC) &_carsimr_geisler_simulate_grid_cpp_c, 2},

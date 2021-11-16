@@ -1,7 +1,4 @@
 #include <Rcpp.h>
-#include <random>
-#include <iostream>
-#include <algorithm>
 using namespace Rcpp;
 
 //' rho_value
@@ -57,15 +54,11 @@ NumericVector generate_and_shuffle(int n, int n2, double p) {
 //' @param r The number of rows in the grid
 //' @param c The number of columns in the grid
 //' @param p The proportion of blue and red cars as determined by the Bernoulli
-//' @param seed The seed to be set for reproduceability.
 //' distribution
-//' @exportClass carsimr
 //' @export
 // [[Rcpp::export]]
-NumericMatrix initialize_grid_cpp(double rho, int r, int c, double p, int seed) {
+NumericMatrix initialize_grid_cpp(double rho, int r, int c, double p) {
   int number_cars = rho_value(rho, r, c) ;
-  std::mt19937 gen ;
-  gen.seed(seed) ;
   NumericVector vec = generate_and_shuffle(r * c, number_cars, p) ;
   vec.attr("dim") = Dimension(r, c) ;
   NumericMatrix grid2 = as<NumericMatrix>(vec) ;
@@ -166,7 +159,7 @@ List simulate_grid_cpp_c(NumericMatrix m, int trials) {
 //' @export
 // [[Rcpp::export]]
 List move_cars_cpp_c(double rho, int r, int c, double p, int trials) {
-  NumericMatrix mat = initialize_grid_cpp(rho, r, c, p, 777) ;
+  NumericMatrix mat = initialize_grid_cpp(rho, r, c, p) ;
   List grids = simulate_grid_cpp_c(mat, trials) ;
   return grids ;
 }

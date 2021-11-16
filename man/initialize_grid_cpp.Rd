@@ -4,7 +4,7 @@
 \alias{initialize_grid_cpp}
 \title{C++ version of initialize_grid.}
 \usage{
-initialize_grid_cpp(rho, r, c, p, seed)
+initialize_grid_cpp(rho, r, c, p)
 }
 \arguments{
 \item{rho}{The proportion of cars to fill the grid rounded to the nearest
@@ -14,9 +14,7 @@ whole number}
 
 \item{c}{The number of columns in the grid}
 
-\item{p}{The proportion of blue and red cars as determined by the Bernoulli}
-
-\item{seed}{The seed to be set for reproduceability.
+\item{p}{The proportion of blue and red cars as determined by the Bernoulli
 distribution}
 }
 \description{
